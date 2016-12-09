@@ -27,22 +27,35 @@ alias dki="docker run -i -t -P"
 alias dex="docker exec -i -t"
 
 # Stop all containers
-dstop() { docker stop $(docker ps -a -q); }
+dStopAll() { docker stop $(docker ps -a -q); }
+alias dstop="dStopAll"
 
 # Remove all containers
-drm() { docker rm $(docker ps -a -q); }
+dRemoveAllContainers() { docker rm $(docker ps -a -q); }
+alias drm="dRemoveAllContainers"
 
 # Stop and Remove all containers
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Remove all images
-dri() { docker rmi $(docker images -q); }
+dockerRemoveImages() { docker rmi $(docker images -q); }
+alias dri="dockerRemoveImages"
 
 # Dockerfile build, e.g., $dbu tcnksm/test 
-dbu() { docker build -t=$1 .; }
+dBuild() { docker build -t=$1 .; }
+alias dbu="dBuild"
 
 # Show all alias related docker
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 
 # Bash into running container
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+dBash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+alias dbash="dBash"
+
+# Docker-Compose Aliases
+alias dc="docker-compose"
+alias dcbu="docker-compose build"
+alias dcup="docker-compose up -d"
+alias dcdn="docker-compose down"
+alias dclg="docker-compose logs"
+alias dclf="docker-compose logs -f"
