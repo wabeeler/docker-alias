@@ -18,13 +18,16 @@ alias di="docker images"
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
 # Run deamonized container, e.g., $dkd base /bin/echo hello
-alias dkd="docker run -d -P"
+alias drd="docker run -d -P"
 
 # Run interactive container, e.g., $dki base /bin/bash
-alias dki="docker run -i -t -P"
+alias dri="docker run -i -t -P"
 
 # Execute interactive container, e.g., $dex base /bin/bash
 alias dex="docker exec -i -t"
+
+# Kill running container
+alias dki="docker kill"
 
 # Stop all containers
 dStopAll() { docker stop $(docker ps -a -q); }
@@ -39,7 +42,7 @@ alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Remove all images
 dockerRemoveImages() { docker rmi $(docker images -q); }
-alias dri="dockerRemoveImages"
+alias drmi="dockerRemoveImages"
 
 # Dockerfile build, e.g., $dbu tcnksm/test 
 dBuild() { docker build -t=$1 .; }
